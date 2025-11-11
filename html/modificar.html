@@ -72,10 +72,10 @@
             let idProd = data.idProd; // Ahora ya tenemos guardado en una variable el valor del campo del formulario
             console.log(idProd);
 
-            console.log(`Realizando una peticion GET a la url ${url}/products/${idProd}`);
+            console.log(`Realizando una peticion GET a la url ${url}/api/products/${idProd}`);
             
             // Enviamos en una peticion GET el id pegado a la url
-            let response = await fetch(`${url}/products/${idProd}`);
+            let response = await fetch(`${url}/api/products/${idProd}`);
 
             let datos = await response.json();
             console.log(datos);
@@ -86,8 +86,8 @@
 
             let htmlProducto = `
                 <li class="li-producto">
-                        <img class="producto-img" src="${producto.image}" alt="${producto.name}">
-                        <p>Id: ${producto.id} / Nombre: ${producto.name} / <strong>Precio: ${producto.price}</strong></p>
+                        <img class="producto-img" src="${producto.imagen}" alt="${producto.nombre}">
+                        <p>Id: ${producto.id} / Nombre: ${producto.nombre} / <strong>Precio: ${producto.precio}</strong></p>
                 </li>
                 <li class="li-botonera">
                     <input type="button" id="updateProduct_button" value="Actualizar producto">
@@ -116,13 +116,13 @@
                     <input type="hidden" name="id" id="idProd" value="${producto.id}">
 
                     <label for="nameProd">Nombre</label>
-                    <input type="text" name="name" id="nameProd" value="${producto.name}" required>
+                    <input type="text" name="name" id="nameProd" value="${producto.nombre}" required>
 
                     <label for="imageProd">Imagen</label>
-                    <input type="text" name="image" id="imageProd" value="${producto.image}" required>
+                    <input type="text" name="image" id="imageProd" value="${producto.imagen}" required>
 
                     <label for="priceProd">Precio</label>
-                    <input type="number" name="price" id="priceProd" value="${producto.price}" required>
+                    <input type="number" name="price" id="priceProd" value="${producto.precio}" required>
 
                     <label for="categoryProd">Categoria</label>
                     <select name="category" id="categoryProd" required>
@@ -130,7 +130,7 @@
                         <option value="drink">bebida</option>
                     </select>
 
-                    <input type="hidden" name="active" id="activeProd" value="${producto.active}">
+                    <input type="hidden" name="active" id="activeProd" value="${producto.activo}">
 
                     <input type="submit" value="Actualizar producto">
                 </form>
@@ -158,7 +158,7 @@
             console.log(data); // Ya tenemos como objetos JS los datos de nuestro formulario anterior con las nuevas modificaciones
 
             try {
-                let response = await fetch(`${url}/products`, {
+                let response = await fetch(`${url}/api/products`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json"
