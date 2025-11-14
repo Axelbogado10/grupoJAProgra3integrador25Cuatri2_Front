@@ -1,18 +1,14 @@
 /*===============
     header
 ================*/
-ul {
-    padding-left: 0;
-}
+ul {padding-left: 0;}
 
 nav ul {
     display: flex;
     justify-content: space-between;    
 }
 
-li {
-    list-style-type: none;
-}
+li {list-style-type: none;}
 
 /*===============
     main
@@ -52,9 +48,7 @@ li {
     text-align: center;
 }
 
-.producto-img {
-    width: 80px;
-}
+.producto-img {width: 85px;}
 
 /*===============
     Pruebas
@@ -67,6 +61,10 @@ li {
     border-bottom: 1px solid #2b3a47;
     box-shadow: 0 2px 8px rgba(0,0,0,.25);
     z-index: 50;
+}
+.navbar {
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .navbar__inner {
@@ -84,16 +82,18 @@ li {
 }
 
 .navbar__link {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
     color: #cfe3ff;
     text-decoration: none;
     font-weight: 600;
-    padding: 8px 12px;
-    border-radius: 10px;
+    padding: 8px 16px;
+    border-radius: 14px;
     transition: transform .15s ease, background .15s ease;
 }
 
-.navbar__link:hover,
-.navbar__link:focus {
+.navbar__link:hover, .navbar__link:focus {
     background: #182634;
     transform: translateY(-1px);
 }
@@ -101,4 +101,40 @@ li {
 .navbar__link.is-active {
     background: #1e2f40;
     outline: 1px solid #3a5a76;
+}
+
+/*===============
+    Logo e Icono
+================*/
+.navbar__brand {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    text-decoration: none;
+    color: #cfe3ff;
+    font-weight: 700;
+}
+
+.navbar__logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.navbar__title {
+    font-size: 1rem;
+}
+
+.navbar__link--logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.navbar__logo-inline {
+    width: 25px;
+    height: 25px;
+    border-radius: 4px;
+    object-fit: cover;
 }
