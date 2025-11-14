@@ -69,10 +69,10 @@
             let idProd = data.idProd; // Ahora ya tenemos guardado en una variable el valor del campo del formulario
             console.log(idProd);
 
-            console.log(`Realizando una peticion GET a la url ${url}/products/${idProd}`);
+            console.log(`Realizando una peticion GET a la url ${url}/api/products/${idProd}`);
             
             // Enviamos en una peticion GET el id pegado a la url
-            let response = await fetch(`${url}/products/${idProd}`);
+            let response = await fetch(`${url}/api/products/${idProd}`);
 
             let datos = await response.json();
 
@@ -82,8 +82,8 @@
 
             let htmlProducto = `
                 <li class="li-producto">
-                        <img class="producto-img" src="${producto.image}" alt="${producto.name}">
-                        <p>Id: ${producto.id} / Nombre: ${producto.name} / <strong>Precio: ${producto.price}</strong></p>
+                        <img class="producto-img" src="${producto.imagen}" alt="${producto.name}">
+                        <p>Id: ${producto.id} / Nombre: ${producto.nombre} / <strong>Precio: ${producto.precio}</strong></p>
                 </li>
                 <li class="li-botonera">
                     <input type="button" id="deleteProduct_button" value="Eliminar producto">
@@ -113,7 +113,7 @@
             console.log(id); // Confirmo que recibo el id correctamente
 
             try {
-                let response = await fetch(`${url}/products/${id}`, {
+                let response = await fetch(`${url}/api/products/${id}`, {
                     method: "DELETE"
                 });
 
