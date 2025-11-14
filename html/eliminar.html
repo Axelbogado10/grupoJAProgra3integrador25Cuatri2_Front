@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tp Integrador Front</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.css'>
     
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Ver</a></li>
-                <li><a href="consultar.html">Consultar id</a></li>
-                <li><a href="crear.html">Crear</a></li>
-                <li><a href="modificar.html">Modificar</a></li>
-                <li><a href="eliminar.html">Eliminar</a></li>
-            </ul>
-        </nav>
+    <nav class="navbar" aria-label="Navegación principal">
+        <div class="navbar__inner">
+        <ul class="navbar__list">
+            <li><a class="navbar__link" href="index.html">Ver</a></li>
+            <li><a class="navbar__link" href="consultar.html">Consultar id</a></li>
+            <li><a class="navbar__link" href="crear.html">Crear</a></li>
+            <li><a class="navbar__link" href="modificar.html">Modificar</a></li>
+            <li><a class="navbar__link is-active" href="eliminar.html">Eliminar</a></li>
+        </ul>
+        </div>
+    </nav>
     </header>
+
     <main>
         <h1>Eliminar producto</h1>
 
