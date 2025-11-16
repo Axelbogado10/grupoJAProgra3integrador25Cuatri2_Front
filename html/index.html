@@ -4,31 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tp Integrador Front</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.css'>
     
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <a href="index.html">
-                    <li>Ver</li>
-                </a>
-                <a href="consultar.html">
-                    <li>Consultar id</li>
-                </a>
-                <a href="crear.html">
-                    <li>Crear</li>
-                </a>
-                <a href="modificar.html">
-                    <li>Modificar</li>
-                </a>
-                <a href="eliminar.html">
-                    <li>Eliminar</li>
-                </a>
-            </ul>
-        </nav>
+    <nav class="navbar" aria-label="Navegación principal">
+        <div class="navbar__inner">
+        <ul class="navbar__list">
+            <a class="navbar__link navbar__link--logo" href="index.html">
+            <img src="../img/JA-Logo.png" alt="Logo del sitio" class="navbar__logo-inline">
+            </a>
+            <li><a class="navbar__link is-active" href="index.html">Inicio</a></li>
+            <li><a class="navbar__link" href="consultar.html">Consultar id</a></li>
+            <li><a class="navbar__link" href="crear.html">Crear</a></li>
+            <li><a class="navbar__link" href="modificar.html">Modificar</a></li>
+            <li><a class="navbar__link" href="eliminar.html">Eliminar</a></li>
+        </ul>
+        </div>
+    </nav>
     </header>
     <main>
         <h1>Listado productos</h1>
