@@ -14,63 +14,6 @@ nav{
 
 nav span{padding: 4px;}
 
-#filter-input{
-    margin: auto;
-    width:300px ;
-    padding: 6px ;
-    border-radius: 2px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    border: none;
-}
-
-#contenedor-productos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));/*repeat repite por cada tarjeta, de parametros tiene autofill lo que rellena 
-    el espacio disponible, minmax son los pixeles que se van usar nunca mas chico que 200px.
-    */
-    gap: 16px;
-    max-width: 90%;
-    margin: 20px auto;
-    padding: 16px;
-}
-
-  /* Estilos de cada tarjeta */
-.product {
-    border: 1px solid #cccccc;
-    border-radius: 8px;
-    overflow: hidden;
-    padding: 10px;
-    text-align: center;
-    background: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-}
-
-.product img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover; /* Para que se ajuste bien sin deformarse */
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 8px;
-}
-
-.product p {
-    margin: 4px;
-    color: #555; 
-}
-
-.product button {
-    margin-top: 10px;
-    margin: auto;
-    padding: 10px;
-    border: none;
-    background: #048804cc;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
 
 footer{
     display: flex;
@@ -82,29 +25,6 @@ footer{
     margin: auto;
 }
 
-.product-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-}
-
-.product-item button{
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    background-color: #f00606;
-    border: none;
-    margin-left: 80px;
-    padding: 4px;
-    color: #fff;
-}
-
-.Delete-cart{
-    border: none;
-    color: #fff;
-    background-color: #f00606;
-    border-radius: 10px;
-}
 
 /* Logo en el nav */
 .logo img {
@@ -215,11 +135,24 @@ footer{
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-/* Botón del carrito */
-.cart-button {
+.cart-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bloalgoue-item{
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 9px;
+}
+
+.linea-separacion{
+    max-width: 90%;
+    opacity: 0.3;
+}
+/* Botón del carrito */
+.cart-button {
     padding: 6px 10px;
     border: none;
     background: transparent;
@@ -235,12 +168,20 @@ footer{
     font-size: 14px;
 }
 
+
 /* =======================
     Botones de ordenar 
 ========================*/
+
+.products-header{
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
 .sort-actions button {
     padding: 8px 14px;
-    margin-right: 8px;
+
     border: none;
     border-radius: 999px;
     background-color: #88044dcc;

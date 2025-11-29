@@ -1,0 +1,19 @@
+body{
+    font-family: Arial, sans-serif;
+    background-image:url("http://localhost:3000/uploads/fondo-cliente.jpg");
+    background-size: cover;
+}
+
+#nombreUser{
+    display: flex;
+    padding: 1px 40px;
+    margin-top: 10px;
+}
+
+.login{
+    margin-top:15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+}

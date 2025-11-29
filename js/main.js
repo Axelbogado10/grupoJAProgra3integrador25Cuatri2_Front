@@ -35,7 +35,7 @@ async function obtenerProductos() {
 }
 
 /*==========================================================
-  Ejercicio3: Render de productos en grilla
+ Render de productos en grilla
 ==========================================================*/
 function renderProducts(items) {
   if (!productList) return;
@@ -67,7 +67,7 @@ function renderProducts(items) {
 }
 
 /*==========================================================
-  Ejercicio4: Filtro por input por nombres
+ Filtro por input por nombres
 ==========================================================*/
 function activarFiltroNombre() {
   if (!inputFiltro) return;
@@ -82,7 +82,7 @@ function activarFiltroNombre() {
 }
 
 /*==========================================================
-  Ejercicio5: Maneja Carrito (agregar, eliminar, mostrar)
+  Maneja Carrito (agregar, eliminar, mostrar)
 ==========================================================*/
 function agregarAlCarrito(id) {
   const lista = productosGlobal || [];
@@ -148,7 +148,7 @@ function mostrarCarrito() {
 }
 
 /*==========================================================
-  Ejercicio6: Persistencia con localStorage
+ Persistencia con localStorage
 ==========================================================*/
 function loadCart() {
   try {
