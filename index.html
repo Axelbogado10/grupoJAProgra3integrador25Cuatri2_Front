@@ -1,32 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>language</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Integrador Front</title>
+    <link rel="icon" type="image/png" href="./img/Icono.png" />
+    <link rel="shortcut icon" type="image/png" href="./img/Icono.png" />
+
+    <link rel="stylesheet" href="./css/style.css" />
     <script defer src="./js/main.js"></script>
 </head>
 <body>
-    <main>
-        <header>
-            <nav>
-                <p>holanda, <span id="user-name"></span></p>
-                <input type="text" name="products" id="filter-input" placeholder="Buscar...">
-                <span id="counter"></span>
-            </nav>
-        </header>
+    <nav>
+    <div class="nav-left">
+        <img src="./img/JA-Logo.png" alt="Logo JA" class="logo-nav">
+        <h1>Tienda Cliente Oficial</h1>
+    </div>
 
-    <div id="contenedor-productos"></div>
-               
- <footer>
-    <h2>Carrito</h2>
-    <div class="cart"></div>
-    <ul id="cartItems"></ul>
-    <strong>total:
-        <span id="cartTotal"></span>
-    </strong>
- </footer>
+    <input
+        type="search"
+        id="filter"
+        placeholder="Buscar..."
+        aria-label="Buscar producto"
+    >
+
+    <button class="cart-button" type="button" aria-label="Abrir carrito">
+        <span class="cart-icon" aria-hidden="true">🛒</span>
+        <span id="counter" class="cart-counter" aria-live="polite">0</span>
+    </button>
+</nav>
+
+
+    <main>
+        <section class="container">
+            <div class="products-wrap">
+                <header class="products-header">
+                    <h2>Productos</h2>
+                    <div class="sort-actions">
+                        <button id="sort-name" type="button">Ordenar por nombre</button>
+                        <button id="sort-price" type="button">Ordenar por precio</button>
+                    </div>
+                </header>
+
+                <div class="products" id="product-list" aria-live="polite"></div>
+            </div>
+
+            <aside class="cart-container" id="cart">
+                <h2>Carrito: <span id="cart-label">0 productos</span></h2>
+
+                <ul id="cart-items" class="cart-items" aria-live="polite"></ul>
+
+                <p class="cart-total">
+                    <strong>Total: $<span id="cart-total">0</span></strong>
+                </p>
+
+                <button id="empty-cart" type="button" class="btn-empty">
+                    Vaciar carrito
+                </button>
+            </aside>
+        </section>
     </main>
+
+    <footer class="footer">
+        <small>Parcial Programación III — Integrador Front</small>
+    </footer>
 </body>
 </html>

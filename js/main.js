@@ -1,97 +1,253 @@
-const contenedorProductos = document.getElementById("contenedor-productos");
-const filterInput = document.getElementById("filter-input");
-const cartItems = document.getElementById("cartItems");
-const cartTotal = document.getElementById("cartTotal");
-const counterCart = document.getElementById("counter")
-let url = "http://localhost:3000/api/products";
+const url = "http://localhost:3000/api/products";
 
+const productList   = document.getElementById("product-list");
+const inputFiltro   = document.getElementById("filter");
+const cartItems     = document.getElementById("cart-items");
+const cartTotalEl   = document.getElementById("cart-total");
+const cartCounter   = document.getElementById("cart-counter") || document.getElementById("counter");
+const cartLabel     = document.getElementById("cart-label");
+const emptyCartBtn  = document.getElementById("empty-cart");
+const sortNameBtn   = document.getElementById("sort-name");
+const sortPriceBtn  = document.getElementById("sort-price");
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let productosGlobal = [];
+let cart = [];
+const storageKey = "cart";
 
-async function obtenerProductos(){
-    try {
-        let response = await fetch(`${url}`);
+/*==========================================================
+  Obtener productos desde la API
+==========================================================*/
+async function obtenerProductos() {
+  try {
+    const response = await fetch(url);
+    console.log(`Solicitud fetch GET a ${url}`);
+    const data = await response.json();
+    const productos = data.payload || [];
 
-        console.log(`Solicitud fetch GET a ${url}`);
+    console.log("Productos recibidos:", productos);
 
-        let data = await response.json();
+    productosGlobal = productos;
+    renderProducts(productosGlobal);
+  } catch (error) {
+    console.error("Error obteniendo productos: ", error);
+    renderProducts([]);
+  }
+}
 
-        console.log(data);
-        let productos = data.payload;
-        console.log(productos);
+/*==========================================================
+  Ejercicio3: Render de productos en grilla
+==========================================================*/
+function renderProducts(items) {
+  if (!productList) return;
+  productList.innerHTML = "";
 
+  if (!items || items.length === 0) {
+    productList.innerHTML = `
+      <div class="no-products">
+        <img src="img/no-products.webp" alt="No hay productos disponibles">
+        <h3>Producto no encontrado</h3>
+        <p>No se encontró ningún producto</p>
+      </div>`;
+    return;
+  }
 
-        productosGlobal = productos;
-        mostrarProductos(productos);
-    } catch (error) {
-        console.error("Erros obteniendo productos: ", error)
+  items.forEach((item) => {
+    const imageSrc = item.ruta || item.imagen || "img/no-image.png";
+
+    productList.innerHTML += `
+      <div class="card-producto">
+        <img src="${imageSrc}" alt="Imagen de ${item.nombre}">
+        <h3>${item.nombre}</h3>
+        <p>$${item.precio}</p>
+        <button type="button" onclick="agregarAlCarrito(${item.id})">
+          Agregar al carrito
+        </button>
+      </div>`;
+  });
+}
+
+/*==========================================================
+  Ejercicio4: Filtro por input por nombres
+==========================================================*/
+function activarFiltroNombre() {
+  if (!inputFiltro) return;
+  inputFiltro.addEventListener("input", function () {
+    const texto = inputFiltro.value.trim().toLowerCase();
+    const base = productosGlobal || [];
+    const resultado = base.filter((p) =>
+      p.nombre && p.nombre.toLowerCase().includes(texto)
+    );
+    renderProducts(resultado);
+  });
+}
+
+/*==========================================================
+  Ejercicio5: Maneja Carrito (agregar, eliminar, mostrar)
+==========================================================*/
+function agregarAlCarrito(id) {
+  const lista = productosGlobal || [];
+  const producto = lista.find((p) => Number(p.id) === Number(id));
+  if (!producto) return;
+
+  const existente = cart.find((it) => Number(it.id) === Number(id));
+  if (existente) {
+    existente.cantidad += 1;
+    console.log(
+      "Cantidad aumentada: " + existente.nombre + " x" + existente.cantidad
+    );
+  } else {
+    cart.push({
+      id: producto.id,
+      nombre: producto.nombre,
+      precio: producto.precio,
+      imagen: producto.imagen,
+      cantidad: 1,
+    });
+    console.log("Producto agregado: " + producto.nombre);
+  }
+  saveCart(cart);
+  mostrarCarrito();
+}
+
+function eliminarProducto(index) {
+  if (index < 0 || index >= cart.length) return;
+  const removed = cart.splice(index, 1)[0];
+  if (removed) console.log("Producto eliminado: " + removed.nombre);
+  saveCart(cart);
+  mostrarCarrito();
+}
+
+function mostrarCarrito() {
+  if (!cartItems) return;
+  cartItems.innerHTML = "";
+
+  if (!cart || cart.length === 0) {
+    cartItems.innerHTML = "<p>El carrito está vacío</p>";
+    actualizarResumenCarrito();
+    return;
+  }
+
+  cart.forEach(function (item, index) {
+    const subtotal = (item.precio * item.cantidad).toFixed(2);
+    cartItems.innerHTML +=
+      '<li class="bloalgoue-item">' +
+        '<p class="nombre-item">' +
+          item.nombre +
+          " x " +
+          item.cantidad +
+          " — $" +
+          subtotal +
+        "</p>" +
+        '<button type="button" class="boton-eliminar" onclick="eliminarProducto(' +
+          index +
+        ')">Eliminar</button>' +
+      "</li>";
+  });
+
+  actualizarResumenCarrito();
+}
+
+/*==========================================================
+  Ejercicio6: Persistencia con localStorage
+==========================================================*/
+function loadCart() {
+  try {
+    const saved = localStorage.getItem(storageKey);
+    if (saved) {
+      return JSON.parse(saved);
     }
+  } catch (e) {
+    console.warn("No se pudo leer el carrito de localStorage", e);
+  }
+  return [];
 }
 
-function mostrarProductos(array){
-    let htmlProductos = "";
-    array.forEach(prod => {
-        htmlProductos += `
-            <div class="product">
-            <img src="${prod.imagen}" alt="${prod.nombre}">
-            <h3>${prod.nombre}</h3>
-            <p>$${prod.precio}</p>
-            <button onclick="addToCart(${prod.id})">agregar al carrito</button>
-            </div>
-        `;
+function saveCart(arr) {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(arr));
+  } catch (e) {
+    console.warn("No se pudo guardar el carrito en localStorage", e);
+  }
+}
+
+function restaurarCarritoDesdeStorage() {
+  const guardado = loadCart();
+  if (Array.isArray(guardado) && guardado.length > 0) {
+    cart = guardado;
+  } else {
+    cart = [];
+  }
+  mostrarCarrito();
+}
+
+/*==========================================================
+  Ejercicio7: Contador, header y total
+==========================================================*/
+function actualizarResumenCarrito() {
+  if (!cartCounter || !cartLabel || !cartTotalEl) return;
+
+  let unidades = 0;
+  let total = 0;
+
+  cart.forEach(function (item) {
+    unidades += item.cantidad;
+    total += item.precio * item.cantidad;
+  });
+
+  cartCounter.textContent = unidades;
+  cartLabel.textContent =
+    unidades + " " + (unidades === 1 ? "producto" : "productos");
+  cartTotalEl.textContent = total.toFixed(2);
+}
+
+/*==========================================================
+  Ejercicio8: Botones para ordenar
+==========================================================*/
+function activarOrdenamientos() {
+  if (sortNameBtn) {
+    sortNameBtn.addEventListener("click", function () {
+      const porNombre = (productosGlobal || [])
+        .slice()
+        .sort(function (a, b) {
+          return a.nombre.localeCompare(b.nombre);
+        });
+      renderProducts(porNombre);
     });
-
-    contenedorProductos.innerHTML = htmlProductos;
-
-}
-
-function addToCart(id){
-    const product = productosGlobal.find((p) => p.id === id );
-    cart.push(product);
-    renderCart();
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-}
-
-function renderCart(){
-    let total = 0;
-    cartItems.innerHTML = "";
-    cart.forEach((itemCart, id) => {
-        total += itemCart.precio;
-        cartItems.innerHTML +=  `
-        <li class="product-item">${itemCart.nombre} - Precio: $${itemCart.precio} <button onclick="eraseCart(${id})">Eliminar</button> </li>
-        `;
+  }
+  if (sortPriceBtn) {
+    sortPriceBtn.addEventListener("click", function () {
+      const porPrecio = (productosGlobal || [])
+        .slice()
+        .sort(function (a, b) {
+          return a.precio - b.precio;
+        });
+      renderProducts(porPrecio);
     });
-    cartItems.innerHTML +=`<button class="Delete-cart" onclick="DeleteCart()">Borrar Todo</button>`;
-    cartTotal.textContent = total.toFixed(2);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    counterCart.innerHTML =` carrito: ${cart.length} productos`
-};
-
-function filtrarProductos(texto){
-    let textoFiltrado = texto.toLowerCase();
-    let filtrado = productosGlobal.filter(prod => prod.nombre.toLowerCase().includes(textoFiltrado));
-    mostrarProductos(filtrado);
+  }
 }
 
-filterInput.addEventListener("input", (e) => {
-    filtrarProductos(e.target.value);
-});
+/*==========================================================
+  Ejercicio9: Vaciar carrito
+==========================================================*/
+function activarVaciadoCarrito() {
+  if (!emptyCartBtn) return;
+  emptyCartBtn.addEventListener("click", function () {
+    if (cart.length === 0) return;
+    cart.length = 0;
+    console.log("Carrito vaciado");
+    saveCart(cart);
+    mostrarCarrito();
+  });
+}
+function init() {
+  restaurarCarritoDesdeStorage();
 
-function eraseCart(i){
-    cart.splice(i,1);
-    renderCart();
-};
+  obtenerProductos();
 
-//funcion para eliminar TODOS los productos del carrito
-function DeleteCart(){
-    cart.splice(0,13);
-    renderCart();
+  activarFiltroNombre();
+  activarOrdenamientos();
+  activarVaciadoCarrito();
+  actualizarResumenCarrito();
 }
 
-function init(){
-    obtenerProductos();
-    renderCart();
-}
-
-init()
+init();
