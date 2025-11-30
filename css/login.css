@@ -1,28 +1,44 @@
 body{
-    font-family: Arial, sans-serif;
-    background-image:url("http://localhost:3000/uploads/fondo-cliente.jpg");
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image:url("http://localhost:3000/uploads/gamer-login.jpg");
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 
 #nombreUser{
     display: flex;
-    padding: 1px 40px;
+    align-items: center;
+    padding: 2px 40px;
     margin-top: 10px;
+    border-radius: 10px;
+    border: none;
+    padding-top: 5px;
 }
 
 .login{
-    margin-top:15%;
+    color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #fff;
-}
+    padding: 50px;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
 .btn-login-page {
     margin-top: 12px;
     padding: 8px 20px;
     border: none;
     border-radius: 999px;
-    background-color: #88044dcc;
+    background-color: #078fb1cc;
     color: #fff;
     cursor: pointer;
     font-size: 0.9rem;
@@ -31,7 +47,13 @@ body{
 }
 
 .btn-login-page:hover {
-    background-color: #a10660;
+    background-color: #06a84f;
     transform: translateY(-1px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+#nombreUser:focus {
+    outline: none;
+    box-shadow: 0 0 5px #4d7291;
+    border: none;
 }

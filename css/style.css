@@ -1,6 +1,7 @@
 body{
     font-family: Arial, sans-serif;
     margin: 0;
+    background-image:url("http://localhost:3000/uploads/tienda-bg.jpg");
 }
 
 nav{
@@ -20,8 +21,6 @@ footer{
     flex-direction: column;
     align-items: center;
     width: 70%;
-    background-color: #fff;
-    border-radius: 30px;
     margin: auto;
 }
 
@@ -113,6 +112,7 @@ footer{
 .product button:hover {
     opacity: 0.9;
 }
+
 .nav-left {
     display: flex;
     align-items: center;
@@ -136,9 +136,18 @@ footer{
 }
 
 .cart-container{
+  background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 30%;
+    border-radius: 18px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: auto;
 }
 
 .bloalgoue-item{
@@ -300,6 +309,10 @@ nav h1 {font-size: 1.25rem;}
 #product-list,
 #contenedor-productos {
     grid-template-columns: 1fr; /* una sola columna */
+}
+
+.cart-container{
+    max-width: 90%;
 }
 
 .card-producto,
