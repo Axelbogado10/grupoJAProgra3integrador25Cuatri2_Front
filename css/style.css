@@ -312,3 +312,22 @@ nav h1 {font-size: 1.25rem;}
     height: 170px;
 }
 }
+
+.nav-login-btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 999px;
+    background-color: #88044dcc;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-login-btn:hover {
+    background-color: #a10660;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}

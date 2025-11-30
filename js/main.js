@@ -86,10 +86,11 @@ function activarFiltroNombre() {
 ==========================================================*/
 function agregarAlCarrito(id) {
   const lista = productosGlobal || [];
-  const producto = lista.find((p) => Number(p.id) === Number(id));
+  // Sin Number(), comparamos de forma simple
+  const producto = lista.find((p) => p.id == id);
   if (!producto) return;
 
-  const existente = cart.find((it) => Number(it.id) === Number(id));
+  const existente = cart.find((it) => it.id == id);
   if (existente) {
     existente.cantidad += 1;
     console.log(
