@@ -1,14 +1,14 @@
 const url = "http://localhost:3000/api/products";
 
-const productList   = document.getElementById("product-list");
-const inputFiltro   = document.getElementById("filter");
-const cartItems     = document.getElementById("cart-items");
-const cartTotalEl   = document.getElementById("cart-total");
-const cartCounter   = document.getElementById("cart-counter") || document.getElementById("counter");
-const cartLabel     = document.getElementById("cart-label");
-const emptyCartBtn  = document.getElementById("empty-cart");
-const sortNameBtn   = document.getElementById("sort-name");
-const sortPriceBtn  = document.getElementById("sort-price");
+const productList= document.getElementById("product-list");
+const inputFiltro= document.getElementById("filter");
+const cartItems= document.getElementById("cart-items");
+const cartTotalEl= document.getElementById("cart-total");
+const cartCounter= document.getElementById("cart-counter") || document.getElementById("counter");
+const cartLabel = document.getElementById("cart-label");
+const emptyCartBtn = document.getElementById("empty-cart");
+const sortNameBtn = document.getElementById("sort-name");
+const sortPriceBtn = document.getElementById("sort-price");
 
 let productosGlobal = [];
 let cart = [];
@@ -67,7 +67,95 @@ function renderProducts(items) {
 }
 
 /*==========================================================
- Filtro por input por nombres
+    Imprimir PDF
+==========================================================*/
+const printTicketBtn = document.getElementById("print-ticket");
+
+if (printTicketBtn) {
+    printTicketBtn.addEventListener("click", imprimitTicket);
+}
+
+async function imprimitTicket() {
+  // Si el carrito está vacío, no hacemos nada
+    if (!cart || cart.length === 0) {
+        alert("El carrito está vacío. Agregá productos antes de imprimir.");
+        return;
+    }
+
+  // Tomamos jsPDF desde la librería cargada en index.html
+    const fuente = window.jspdf || window.jsPDF || null;
+    if (!fuente || !fuente.jsPDF) {
+        alert("No se pudo generar el PDF (jsPDF no está disponible).");
+        return;
+    }
+
+    const { jsPDF } = fuente;
+    const doc = new jsPDF();
+
+    let y = 10;
+    const idProductos = [];
+    let total = 0;
+
+    doc.setFontSize(16);
+    doc.text("JA - Ticket de compra", 10, y);
+
+    y += 10;
+    doc.setFontSize(12);
+
+    // Usamos tu carrito REAL: 'cart'
+    cart.forEach(function (item) {
+        idProductos.push(item.id);
+        const subtotal = item.precio * item.cantidad;
+        total += subtotal;
+
+    doc.text(
+    item.nombre + " x " + item.cantidad + " — $" + subtotal.toFixed(2), 10, y);
+        y += 7;
+    });
+
+    y += 5;
+    doc.text("Total: $" + total.toFixed(2), 10, y);
+
+  // Descarga del PDF
+    doc.save("ticket.pdf");
+
+  // Llamamos a RegistroVentas SIN try/catch ni console.warn
+    registrarVentas(total, idProductos);
+}
+
+
+/*==========================================================
+    RegistroVentas
+==========================================================*/
+async function registrarVentas(total, idProductos){
+    const fecha = new Date();
+    const fechaFormato = fecha.toISOString().slice(0,19).replace("T"," ");
+    const data = {
+        date: fechaFormato,
+        total_price: total,
+        user_name: nombreUsuario,
+        productos: idProductos,
+    }
+    /*
+    let response = await fetch("http://localhost:3000/api/sales",{
+        method: "POST",
+        headers: {
+            "Content-Type": application/json,
+        },
+        body: JSON.stringify(data)
+    });
+    const resultado = await response.json();*/
+
+    if(response.ok){
+        console.log(response);
+        alert(resultado.message);
+        sessionStorage.removeItem("nombreUsuario");
+        window.location.href = "index.html"
+    }
+}
+
+/*==========================================================
+    Filtro por input por nombres
 ==========================================================*/
 function activarFiltroNombre() {
   if (!inputFiltro) return;

@@ -222,6 +222,23 @@ footer{
     box-shadow: 0 2px 5px rgba(0,0,0,0.25);
     transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
+.btn-print {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 999px;
+    background-color: #048804cc;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-print:hover {
+    background-color: #036a03;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
 
 .boton-eliminar:hover,
 .btn-empty:hover {
@@ -280,6 +297,38 @@ nav {
 }
 
 .cart-button {align-self: center;}
+.cart-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* Que ambos ocupen el mismo ancho */
+.cart-buttons .btn-empty,
+.cart-buttons .btn-print {
+    flex: 1;
+}
+
+/* Si querés que Imprimir sea verde */
+.btn-print {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 999px;
+    background-color: #048804cc;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-print:hover {
+    background-color: #036a03;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
 
 #product-list,
 #contenedor-productos {

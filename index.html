@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="./img/Icono.png" />
 
     <link rel="stylesheet" href="./css/style.css" />
+    <script src="./node_modules/jspdf/dist/jspdf.umd.min.js"></script>
     <script defer src="./js/main.js"></script>
 </head>
 <body>
@@ -24,7 +25,7 @@
         aria-label="Buscar producto"
     >
 
-    <a href="/login" class="nav-login-btn">Volver al Log In</a>
+    <a href="/login" class="nav-login-btn">Log In</a>
 
     <button class="cart-button" type="button" aria-label="Abrir carrito">
         <span class="cart-icon" aria-hidden="true">🛒</span>
@@ -56,9 +57,15 @@
                     <strong>Total: $<span id="cart-total">0</span></strong>
                 </p>
 
-                <button id="empty-cart" type="button" class="btn-empty">
-                    Vaciar carrito
-                </button>
+                <div class="cart-buttons">
+                    <button id="empty-cart" type="button" class="btn-empty">
+                        Vaciar carrito
+                    </button>
+
+                    <button id="print-ticket" type="button" class="btn-print">
+                        Imprimir Ticket
+                    </button>
+                </div>
             </div>
         </section>
     </main>
