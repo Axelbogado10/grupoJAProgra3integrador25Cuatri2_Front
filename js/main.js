@@ -43,10 +43,8 @@ function renderProducts(items) {
 
   if (!items || items.length === 0) {
     productList.innerHTML = `
-      <div class="no-products">
-        <img src="img/no-products.webp" alt="No hay productos disponibles">
+      <div class="no-products">  
         <h3>Producto no encontrado</h3>
-        <p>No se encontró ningún producto</p>
       </div>`;
     return;
   }
