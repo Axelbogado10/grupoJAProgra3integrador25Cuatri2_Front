@@ -6,15 +6,16 @@
     <title>LogIn</title>
     <link rel="icon" type="image/png" href="../img/Icono.png" />
     <link rel="shortcut icon" type="image/png" href="../img/Icono.png" />
+    <script defer src="/js/login.js"></script>
 </head>
 <body>
     <div class="login">
         <h1>Login</h1>
-        <form>
+        <form class ="login-form" id="loginForm">
             <label for="nombreUser">Ingrese Su Nombre</label>
             <input type="text" name="name" id="nombreUser" required>
+            <button type="submit"  class="btn-login-page">Log In</button>
         </form>
-            <button onclick="location.href=`/index.html`" class="btn-login-page">Log In</button>
     </div>
 </body>
 </html>
