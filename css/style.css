@@ -97,6 +97,11 @@ footer{
     color: #555;
 }
 
+.card-producto:hover{
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+    transition: all 0.2s ease-in-out;
+}
 .card-producto button,
 .product button {
     margin-top: 10px;
